@@ -2,6 +2,8 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SideNavComponent } from './side-nav.component';
+import { provideRouter } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SideNavComponent', () => {
   let component: SideNavComponent;
@@ -9,7 +11,8 @@ describe('SideNavComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule]
+      imports: [SideNavComponent, NoopAnimationsModule, HttpClientTestingModule],
+      providers: [provideRouter([])]
     }).compileComponents();
   }));
 

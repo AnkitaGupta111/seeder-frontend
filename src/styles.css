@@ -20,3 +20,15 @@ body {
 .logo {
     height: 28px;
 }
+
+.error-snack {
+    background-color: rgb(182, 74, 74);
+}
+
+.success-snack {
+    background-color: #02be6e;
+}
+
+.dialog-box .mat-dialog-container {
+    padding: 24px;
+}

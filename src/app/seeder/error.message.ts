@@ -5,5 +5,8 @@ export const ERROR_MESSAGE_MAP: any = {
     },
     "password": {
         "required": "password can't be empty",
+    },
+    "name": {
+        "required": "name can't be empty",
     }
 }

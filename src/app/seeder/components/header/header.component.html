@@ -1,0 +1,13 @@
+<div appGridContainer justifyContent="space-between">
+
+    <app-header-content [header]="heading" [subheader]="subheading">
+    </app-header-content>
+
+    <div class="avatar" mat-icon-button [matMenuTriggerFor]="menu">
+        <span>{{ initials }}</span>
+    </div>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLogout()">Logout</button>
+    </mat-menu>
+</div>

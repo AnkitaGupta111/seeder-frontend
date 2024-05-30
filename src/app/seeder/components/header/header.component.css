@@ -1,0 +1,14 @@
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    background-color: blueviolet;
+}
+
+:host {
+    width: 100%;
+}

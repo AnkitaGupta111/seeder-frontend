@@ -1,44 +1,22 @@
-<div appGridContainer height="100%">
-    <mat-card appGridItem alignSelf="stretch" flex="4" padding="48px">
-        <div appGridContainer gap="12px">
-            <img src=" assets/icons/logo.svg" class="logo" />
-            <div class="text_24_bold">Seeder</div>
-        </div>
-        <div appGridContainer height="100%">
-            <img src="assets/images/login.png" />
-        </div>
-    </mat-card>
-    <div appGridItem flex="6">
-        <div appGridContainer flexDirection="column" gap="42px">
+<app-login-template [heading]="heading" [subheading]="subheading" [onButtonClick]="onLogin" [buttonText]="buttonText"
+    [formGroup]="formGroup" [imgSrc]="imgSrc" [buttonDisabled]="!!responseError">
+    <mat-form-field appearance="fill">
+        <img matPrefix src="assets/icons/direct.png" alt="email"/>
+        <input formControlName="email" matInput placeholder="Enter your email id">
+        <mat-error>{{getErrorMessage("email")}}</mat-error>
+    </mat-form-field>
 
-            <div>
-                <h1> Login to Seeder ✨ </h1>
-                <div class="mat-subheading-2">
-                    Enter your mail id and password to login
-                </div>
-            </div>
+    <mat-form-field appearance="fill">
+        <img matPrefix src="assets/icons/lock.png" alt="password"/>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password"
+            formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error>{{getErrorMessage("password")}}</mat-error>
+    </mat-form-field>
 
-            <div appGridContainer gap="8px" flexDirection="column" [formGroup]="formGroup">
-                <mat-form-field appearance="fill">
-                    <img matPrefix src="assets/icons/direct.png" />
-                    <input formControlName="email" matInput placeholder="Enter your email id">
-                    <mat-error>{{getErrorMessage("email")}}</mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="fill">
-                    <img matPrefix src="assets/icons/lock.png" />
-                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password"
-                        formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error>{{getErrorMessage("password")}}</mat-error>
-                </mat-form-field>
-            </div>
-
-            <button mat-flat-button color="primary" (click)="onLogin()"
-                [disabled]="formGroup.invalid || responseError">Continue</button>
-
-        </div>
+    <div>Don’t have an account?<a mat-button color="primary" routerLink="/signup">Sign Up</a>
     </div>
-</div>
+
+</app-login-template>

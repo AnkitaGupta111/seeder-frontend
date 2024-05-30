@@ -10,4 +10,8 @@ import { HomeTemplateComponent } from '../../templates/home-template/home-templa
 })
 export class CashAcclerationComponent {
 
+  heading: string = "Cash acclerations"
+  subheading: string = "Place to create new cash kicks to run your business"
+
+
 }

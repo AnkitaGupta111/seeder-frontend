@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ERROR_MESSAGE_MAP } from '../../error.message';
 import { AuthService } from '../../../shared/services/http/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
+import { LoginTemplateComponent } from '../../templates/login-template/login-template.component';
+import { MatButtonModule } from '@angular/material/button';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SharedModule, MatCard, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule, ReactiveFormsModule],
+  imports: [SharedModule, MatFormFieldModule, MatIconModule, MatInputModule, ReactiveFormsModule, LoginTemplateComponent, MatButtonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,8 +22,12 @@ export class LoginComponent implements OnInit {
   hide = true;
   formGroup: FormGroup;
   responseError: string | null = null;
+  heading: string = "Login to Seeder ✨"
+  subheading: string = "Enter your mail id and password to login"
+  imgSrc = "assets/images/login.png"
+  buttonText = "Continue"
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router, private userService: UserService) {
     this.formGroup = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required)
@@ -35,16 +40,21 @@ export class LoginComponent implements OnInit {
         this.responseError = null
       }
     })
+    this.onLogin = this.onLogin.bind(this)
   }
-
 
 
   onLogin() {
     this.auth.login({ ...this.formGroup.value })
-      .subscribe((response) => {
-        this.router.navigate(["home"]);
-      }, (errMessage) => {
-        this.responseError = errMessage || 'Invalid credentials'
+      .subscribe({
+        next: () => {
+          this.userService.getUser()
+          this.router.navigate(["home"]);
+        },
+        error: (err) => {
+          this.responseError = err.error?.message || 'Invalid credentials'
+          throw err
+        }
       })
   }
 

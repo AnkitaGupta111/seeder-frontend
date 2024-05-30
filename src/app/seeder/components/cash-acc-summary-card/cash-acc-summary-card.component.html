@@ -1,1 +1,15 @@
-<p>cash-acc-summary-card works!</p>
+<div appGridContainer padding="32px">
+    <div appGridItem>
+        <app-summary-tile imgSrc="assets/icons/calender.png" title="Term Cap"
+            [value]="termLengthString"></app-summary-tile>
+    </div>
+    <div appGridItem>
+        <app-summary-tile imgSrc="assets/icons/credit.png" title="Available Credit"
+            [value]="availableCreditString"></app-summary-tile>
+    </div>
+
+    <div appGridItem>
+        <app-summary-tile imgSrc="assets/icons/percentage.png" title="Max interest rate"
+            [value]="interestRateString"></app-summary-tile>
+    </div>
+</div>

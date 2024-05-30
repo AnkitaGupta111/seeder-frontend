@@ -1,26 +1,19 @@
 <div appGridContainer flexDirection="column" padding="20px 32px 0px 32px" gap="24px" height="100%">
-    <div appGridContainer justifyContent=" space-between">
 
-        <ng-container *ngComponentOutlet="headerContentNode"></ng-container>
-        <div class="avatar" mat-icon-button [matMenuTriggerFor]="menu">
-            <span>{{ initials }}</span>
-        </div>
-
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onLogout()">Logout</button>
-        </mat-menu>
-    </div>
+    <ng-container *ngComponentOutlet="headerNode; inputs: headerContent"></ng-container>
 
     <div appGridContainer gap="24px">
-        <mat-card class="summary-card">
-            <ng-container *ngComponentOutlet="summaryCardContentNode"></ng-container>
+        <mat-card appGridItem class="summary-card" flex="7">
+            <ng-container
+                *ngComponentOutlet="summaryCardContentNode;"></ng-container>
         </mat-card>
-        <mat-card appGridItem alignSelf="stretch">
-            <ng-container *ngComponentOutlet="quickAccessCardContentNode"></ng-container>
+        <mat-card appGridItem alignSelf="stretch" flex="3">
+            <ng-container
+                *ngComponentOutlet="quickAccessCardContentNode;"></ng-container>
         </mat-card>
     </div>
 
-    <div appGridContainer height="100%">
+    <div appGridContainer height="60%">
         <mat-card appGridItem alignSelf="stretch">
             <ng-container *ngComponentOutlet=" mainCardContentNode"></ng-container>
         </mat-card>

@@ -1,1 +1,11 @@
-<p>home-quick-access-card works!</p>
+<div appGridContainer gap="20px" flexDirection="column" alignItems="start" padding="32px">
+    <h2 style="margin: 0;">
+        Launch a new Cash Kick
+    </h2>
+    <div class="mat-h4 mat-subheading-1">
+        You have upto <b>{{totalCashAdvance | currency}}</b> available for a new cash advance
+    </div>
+
+    <button mat-flat-button color="primary" [disabled]="!totalCashAdvance" (click)="onLaunchNewCashkickClick()">New
+        Cash Kick</button>
+</div>

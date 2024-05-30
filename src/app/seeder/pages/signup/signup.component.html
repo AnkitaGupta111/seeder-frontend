@@ -1,1 +1,28 @@
-<p>signup works!</p>
+<app-login-template [heading]="heading" [onButtonClick]="onSignUp" [buttonText]="buttonText" [imgSrc]="imgSrc"
+    [formGroup]="formGroup" [buttonDisabled]="!!responseError">
+
+    <mat-form-field appearance="fill">
+        <img matPrefix src="assets/icons/smile.png" alt="name"/>
+        <input formControlName="name" matInput placeholder="Your Name">
+        <mat-error>{{getErrorMessage("name")}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <img matPrefix src="assets/icons/direct.png" alt="email"/>
+        <input formControlName="email" matInput placeholder="Email Address">
+        <mat-error>{{getErrorMessage("email")}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <img matPrefix src="assets/icons/lock.png" alt="password"/>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error>{{getErrorMessage("password")}}</mat-error>
+    </mat-form-field>
+
+    <div>Already have an account?<a mat-button color="primary" routerLink="/login">Login</a>
+    </div>
+
+</app-login-template>

@@ -1,12 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { LoginResponseData } from '../../../seeder/interfaces/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
-
 })
 export class AuthService {
 
@@ -32,8 +31,7 @@ export class AuthService {
 
           sessionStorage.setItem('userData', JSON.stringify({ ...response, tokenExpirationDate }));
           this.autoLogout(response.expiresIn);
-        }),
-        catchError((errResponse) => { console.error(errResponse); return throwError(() => new Error(errResponse.error?.message)) }),
+        })
       );
   }
 

@@ -1,0 +1,20 @@
+<div appGridContainer gap="20px" padding="24px" flexDirection="column" alignItems="flex-start">
+    <h2>Summary</h2>
+
+    <app-key-value key="Term" [value]="termLength"></app-key-value>
+    <app-key-value key="Selected contracts" [value]="contractsSelected.length.toString()"></app-key-value>
+    <app-key-value key="Pay back amount" [value]="finacedAmount"></app-key-value>
+    <app-key-value key="Rate%" [value]="rateOfInterestAmount.toString()"></app-key-value>
+
+    <mat-slider tickInterval="1" min="0" [max]="totalAvailableAmount" color="primary" *ngIf="!isReview">
+        <input matSliderThumb [value]="selectedAmount" />
+    </mat-slider>
+    <span *ngIf="!isReview">{{selectedAmount}} selected of {{totalAvailableAmount}}</span>
+    <mat-divider></mat-divider>
+
+    <app-key-value key="Total Payout" [value]="selectedAmount"></app-key-value>
+
+    <button mat-flat-button color="primary" (click)="onClick()" [disabled]="!contractsSelected.length">
+        {{isReview ? 'Submit your credit' : 'Review your credit'}}</button>
+
+</div>

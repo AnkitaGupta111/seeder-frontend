@@ -1,1 +1,33 @@
-<p>login-template works!</p>
+<div appGridContainer height="100%">
+    <mat-card appGridItem alignSelf="stretch" flex="4" padding="48px">
+        <div appGridContainer gap="12px">
+            <img src=" assets/icons/logo.svg" class="logo" alt="logo"/>
+            <div class="text_24_bold">Seeder</div>
+        </div>
+        <div appGridContainer height="100%">
+            <img [src]="imgSrc" alt=""/>
+        </div>
+    </mat-card>
+    <div appGridItem flex="6">
+        <div appGridContainer flexDirection="column" gap="42px">
+
+            <div>
+                <h1> {{heading}} </h1>
+                <div class="mat-subheading-2">
+                    {{subheading}}
+                </div>
+            </div>
+
+            <div appGridContainer gap="8px" flexDirection="column" [formGroup]="formGroup">
+                <ng-content select="mat-form-field"></ng-content>
+            </div>
+
+            <button mat-flat-button color="primary" (click)="onButtonClick()"
+                [disabled]="formGroup.invalid || buttonDisabled">{{buttonText}}</button>
+
+            <div class="mat-subheading-2">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

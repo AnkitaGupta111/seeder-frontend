@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -8,12 +8,22 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 })
 export class ContractService {
 
+    contracts = new BehaviorSubject<any>(null)
+
     constructor(private httpClient: HttpClient) {
     }
+   
+    getContracts(quryParams: any = {}): Observable<any> {
 
-    getContracts(): Observable<any> {
+        let params = new HttpParams();
+        for (const key in quryParams) {
+            if (quryParams.hasOwnProperty(key)) {
+                params = params.set(key, quryParams[key]);
+            }
+        }
+
         return this.httpClient
-            .get<any | HttpErrorResponse>("contracts")
+            .get<any>("contracts", { params })
             .pipe(
                 map((responseData) => {
                     return responseData.map((contracts: any) => ({
@@ -21,7 +31,10 @@ export class ContractService {
                         status: contracts.status
                     }
                     ))
-
+                }), tap((c) => {
+                    if (!Object.keys(quryParams)?.length) {
+                        this.contracts.next(c)
+                    }
                 }),
                 catchError((errResponse) => { console.error(errResponse); return throwError(() => new Error(errResponse.error?.message)) }),
             );

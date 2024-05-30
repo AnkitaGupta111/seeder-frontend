@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeQuickAccessCardComponent } from './home-quick-access-card.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeQuickAccessCardComponent', () => {
   let component: HomeQuickAccessCardComponent;
@@ -8,7 +9,7 @@ describe('HomeQuickAccessCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeQuickAccessCardComponent]
+      imports: [HomeQuickAccessCardComponent, HttpClientTestingModule]
     })
     .compileComponents();
     

@@ -1,0 +1,27 @@
+<div appGridContainer flexDirection="column" padding="20px 32px 20px 32px" gap="24px" height="100%"
+    alignItems="flex-start">
+
+    <ng-container *ngComponentOutlet="headerNode; inputs: headerContent"></ng-container>
+
+    <mat-card>
+        <button mat-button (click)="onBackClick()">
+            <mat-icon>arrow_back</mat-icon>
+            Back
+        </button>
+    </mat-card>
+
+    <div appGridContainer height="100%" gap="20px">
+        <mat-card appGridItem flex="7" alignSelf="stretch">
+            <div appGridContainer flexDirection="column" gap="20px" alignItems="start" padding="24px">
+                <h2>Selected Contracts</h2>
+                <app-table [dataSource]="isReview? contractsSelected :contractsDisplayed" [multiselect]="!isReview"
+                    (selectionChange)="onChangeSelection($event)" [displayedColumns]="colmsDisplayed"></app-table>
+            </div>
+        </mat-card>
+
+        <mat-card appGridItem flex="3" alignSelf="start">
+            <app-cashkick-summary [contractsSelected]="contractsSelected" [isReview]="isReview"
+                [totalAvailableAmount]="totalAvailableAmount" [onButtonClick]="onCreateCashkickClick"></app-cashkick-summary>
+        </mat-card>
+    </div>
+</div>

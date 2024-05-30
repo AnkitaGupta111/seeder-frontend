@@ -11,3 +11,15 @@ export function getGreeting(date: Date) {
         return "Good Night";
     }
 }
+
+export function getTotal(items: any, field: string, filter: any) {
+    return items?.filter((con: any) => con[filter.name] == filter.value)?.reduce((accumulator: number, item: any) => {
+        return accumulator + item[field];
+    }, 0)
+}
+
+export function getMax(items: any, field: string, filter: any) {
+    return items?.filter((con: any) => con[filter.name] == filter.value)?.reduce((max: number, item: any) => {
+        return max < item[field] ? item[field] : max
+    }, 0)
+}

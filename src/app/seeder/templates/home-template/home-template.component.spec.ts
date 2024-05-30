@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeTemplateComponent } from './home-template.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeTemplateComponent', () => {
   let component: HomeTemplateComponent;
@@ -8,7 +9,7 @@ describe('HomeTemplateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeTemplateComponent]
+      imports: [HomeTemplateComponent, HttpClientTestingModule]
     })
     .compileComponents();
     

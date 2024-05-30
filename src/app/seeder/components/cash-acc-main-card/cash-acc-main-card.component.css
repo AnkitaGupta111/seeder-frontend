@@ -2,3 +2,7 @@
     height: 43px;
     width: 147px;
 }
+
+[mat-stroked-button].active {
+    border-color: currentColor;
+}
